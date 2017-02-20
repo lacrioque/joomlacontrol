@@ -2,7 +2,8 @@
     "paths": {
         "installation": "/opt/web/limesurvey_live/",
         "component": "../../component/",
-        "module": "../../module"
+        "module": "../../module",
+        "plugin": "../../plugin",
     },
     "verbosity": 1
 }

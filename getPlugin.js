@@ -1,5 +1,5 @@
 /**
- * get Module retrieves information about a module and
+ * get Plugin retrieves information about a plugin and
  * returns a simplified object containing information about it.
  */
 
@@ -9,23 +9,23 @@ const
     _ = require('lodash'),
     xml2js = require('xml2js'),
 
-    getModuleInfoFile = function(modulePath) {
-        let files = fs.readdirSync(modulePath),
+    getPluginInfoFile = function(pluginPath) {
+        let files = fs.readdirSync(pluginPath),
             xmlFile = _.find(files, function(file, i) {
                 return path.extname(file) == '.xml';
             });
-        return path.join(modulePath, xmlFile);
+        return path.join(pluginPath, xmlFile);
     },
-    parseModuleInfo = function(moduleInfoFile) {
+    parsePluginInfo = function(pluginInfoFile) {
         let def = q.defer(),
             parser = new xml2js.Parser(),
             infoObj = {};
 
-        fs.readFile(moduleInfoFile, function(err, data) {
+        fs.readFile(pluginInfoFile, function(err, data) {
             parser.parseString(data, function(err, result) {
-                let basename = path.basename(moduleInfoFile, '.xml');
+                let basename = path.basename(pluginInfoFile, '.xml');
 
-                infoObj.basename = _.startsWith(basename, 'mod_') ? basename : 'mod_' + basename;
+                infoObj.basename = _.startsWith(basename, 'plg_') ? basename : 'plg_' + basename;
                 infoObj.name = result.extension.name;
                 infoObj.version = result.extension.version;
                 infoObj.language.site = result.extension.languages;
@@ -37,23 +37,23 @@ const
         return def.promise;
     },
 
-    returnModuleFiles = function(modulePath){
-      let modulePath = normalizePath(modulePath);
+    returnPluginFiles = function(pluginPath){
+      let pluginPath = normalizePath(pluginPath);
       return q.Promise(function(resolve, reject) {
-          promiseAdminArray = parseEntry(modulePath).then(
+          promiseAdminArray = parseEntry(pluginPath).then(
               function(value) {
-                  log('warnline',"######################## Collected Module Files #########################\n\n");
+                  log('warnline',"######################## Collected Plugin Files #########################\n\n");
                   resolve({
-                      module: value
+                      plugin: value
                   });
               },
               reject
           );
       });
     }
-    returnModuleInfo = function(modulePath){
-      return parseModuleInfo(getModuleInfoFile(modulePath));
+    returnPluginInfo = function(pluginPath){
+      return parsePluginInfo(getPluginInfoFile(pluginPath));
     };
 
-  exports.getModuleInfo = returnModuleInfo;
-  exports.getModuleFiles = returnModuleFiles;
+  exports.getPluginInfo = returnPluginInfo;
+  exports.getPluginFiles = returnPluginFiles;

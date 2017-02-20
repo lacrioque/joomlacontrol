@@ -61,7 +61,6 @@ const
             return path.join(root, thisPath);
         }
     },
-    readDirRecursive = require('./readDirRecursive.js'),
     parseEntry = function(fileOrFolder) {
         DEBUG("Parsing: ", fileOrFolder);
         return q.Promise(function(resolve, reject) {
@@ -73,7 +72,46 @@ const
             }
         });
     },
-    getComponentInfo = require('./getComponent.js'),
+    getComponentInfo = function(componentPath) {
+        let def = q.defer(),
+            parser = new xml2js.Parser(),
+            files = fs.readdirSync(componentPath),
+            xmlFile = _.find(files, function(file, i) {
+                return path.extname(file) == '.xml';
+            });
+        def.resolve('com_'+path.basename(xmlFile, '.xml'));
+        return def.promise;
+    },
+    readDirRecursive = function(directory) {
+        let thisdirectory = normalizePath(directory);
+        let def = q.defer();
+        let promiseArray = [];
+        INFO("Working directory: ", thisdirectory);
+        fs.readdir(thisdirectory, function(err, files) {
+            if (err) {
+                DEBUG("58", err);
+                def.reject(err);
+            }
+            _.each(files, function(file, i) {
+                let newpromise = parseEntry(path.join(thisdirectory, file));
+                promiseArray.push(newpromise);
+            });
+            q.allSettled(promiseArray).then(
+                function(resultset) {
+                    let resultArray = [];
+                    _.each(resultset, function(result, i) {
+                        resultArray.push(result.value);
+                    });
+                    def.resolve(_.flattenDeep(resultArray));
+                },
+                function(err) {
+                    DEBUG("71", err);
+                    def.reject(err);
+                }
+            ).catch(DEBUG);
+        });
+        return def.promise;
+    },
     getComponent = function() {
         //save locations of the admin part
         let componentPath = normalizePath(CONFIG.componentPath);
@@ -205,16 +243,16 @@ const
         WARNLINE("\n\n");
         getComponentInfo(componentPath)
             .then(
-                function(componentInfo) {
+                function(componentName) {
                     WARNLINE("\n###################### Copying Admin Part    #######################\n");
-                    copyAdminPart(pathObj.admin, installationPath, componentInfo.basename, componentPath)
+                    copyAdminPart(pathObj.admin, installationPath, componentName, componentPath)
                         .then(function() {
                             WARNLINE("\n###################### Copying Site Part    #######################\n");
-                            copySitePart(pathObj.site, installationPath, componentInfo.basename, componentPath)
+                            copySitePart(pathObj.site, installationPath, componentName, componentPath)
                                 .then(function() {
                                     console.log('media')
                                     WARNLINE("\n###################### Copying Media Part    #######################\n");
-                                    copyMediaPart(pathObj.media, installationPath, componentInfo.basename, componentPath)
+                                    copyMediaPart(pathObj.media, installationPath, componentName, componentPath)
                                         .then(function() {
                                             WARNLINE("\r\n###################### Copied Everything successfully ###################\n");
                                             def.resolve()
@@ -425,8 +463,8 @@ if (args.configFile) {
 
 if (args.watch) {
     getComponentInfo(CONFIG.componentPath)
-        .then(function(componentInfo) {
-            CONFIG.componentName = componentInfo.basename;
+        .then(function(componentName) {
+            CONFIG.componentName = componentName;
             watchFiles();
             watchMenu();
         });
