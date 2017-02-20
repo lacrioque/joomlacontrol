@@ -1,0 +1,7 @@
+{
+    "paths": {
+	"installation": "/opt/web/limesurvey_live/",
+	"component": "../../../Lime-Service-Component"
+     },
+    "verbosity": 1
+}
