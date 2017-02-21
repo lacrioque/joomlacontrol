@@ -5,12 +5,10 @@
       "module" : true
     },
     "paths": {
-        "root":"../../",
-        "installation": "/opt/web/limesurvey_live/",
+        "installation": "PATH/TO/YOUR/INSTALLATION",
         "component": "../../component/",
         "module": "../../module",
-        "plugin": "../../plugin"
+        "plugin": "../../plugin",
     },
-    "verbosity": 1,
-    "debug" : false
+    "verbosity": 1
 }
