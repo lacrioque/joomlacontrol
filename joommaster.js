@@ -10,8 +10,11 @@ const
     log = require('./utility/logSys.js'),
     Watch = require('./watcher/watchChange.js'),
     copyUtil = require('./utility/copyUtil.js'),
+    scriptUtil = require('./utility/scriptUtil.js'),
     root = process.cwd(),
     args = require("yargs")
+    .alias('z', 'zip')
+    .describe('z', "Zip up all parts and exit immediately")
     .alias('a', 'fullCopy')
     .describe('a', "Copy all defined extensions to the installation folder")
     .alias('c', 'copyComponent')
@@ -35,7 +38,7 @@ const
     checkConfigFile = function () {
         if (!fs.existsSync('./config.json')) {
             log.warn('No config file found!\nPlease create a config file first.');
-            process.exit(0);
+            process.exit(1);
         }
     },
     startWatching = function () {
@@ -55,10 +58,18 @@ const
             copyUtil.fullCopy();
         }
     },
-    startCreation = function () {},
+    startCreation = function () {
+        if (args.zip) {
+            args.nowatch = true;
+            scriptUtil.zipAll().then(
+                (resolved) => { process.exit(0); }
+            );
+
+        }
+    },
     createConfig = function () {};
 
+checkConfigFile();
 startCreation();
 createConfig();
-checkConfigFile();
 startWatching();

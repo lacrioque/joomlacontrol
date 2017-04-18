@@ -6,7 +6,6 @@
  * moduleName :
  * pluginName :
  * siteLanguagePath :
- * adminLanguagePath :
  */
 "use strict";
 const copyFilesConstructor = function (pathObject) {
@@ -144,7 +143,7 @@ const copyFilesConstructor = function (pathObject) {
             return _copyArrayofFiles(pluginFiles, fromPath, correctPath);
         },
         copyAdminLanguagePart = function (languageFiles, adminLanguagePath) {
-            adminLanguagePath = adminLanguagePath || glob.adminLanguagePath;
+            adminLanguagePath = adminLanguagePath || normalizePath(CONFIG.paths.component);
             let correctPath = _createCorrectAdminLanguagePath(),
                 fromPath = adminLanguagePath;
             return _copyArrayofFiles(languageFiles, fromPath, correctPath);
@@ -204,12 +203,14 @@ const copyFilesConstructor = function (pathObject) {
             return _copyFile(filename, from, to, 1, 1);
         },
         copyTargetAdminLanguageFile = function (file, adminLanguagePath) {
-            adminLanguagePath = adminLanguagePath || glob.adminLanguagePath;
+            adminLanguagePath = adminLanguagePath || normalizePath(CONFIG.paths.component);
             if (adminLanguagePath == null) { return q.resolve('not supported'); }
+
             let correctPath = _createCorrectAdminLanguagePath(),
                 from = path.dirname(file),
                 filename = path.basename(file),
-                to = from.replace(adminLanguagePath, correctPath);
+                to = from.replace(path.join(adminLanguagePath, 'admin', 'language'), correctPath);
+            log.debug([adminLanguagePath, correctPath, to]);
             return _copyFile(filename, from, to, 1, 1);
         },
         copyTargetSiteLanguageFile = function (file, siteLanguagePath) {

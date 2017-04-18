@@ -144,6 +144,7 @@ const CreateWatchChange = function () {
                 return true;
             }
             let type = checkLocation(filepath);
+            log.debug('Filetype: ' + type);
             let result = copyUtil.copyFile(type, filepath);
             result.then(log.debug, log.debug, log.debug);
 

@@ -4,6 +4,7 @@ const
     CONFIG = require('../config.json'),
     createLog = function () {
         let verbosity = process.env.verbosity || CONFIG.verbosity || 0;
+        process.env.verbosity = verbosity;
         process.on('changeVerbosity', function () {
             verbosity++;
             verbosity = verbosity > 2 ? 0 : verbosity;
