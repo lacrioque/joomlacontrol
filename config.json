@@ -1,15 +1,15 @@
 {
     "parts" : {
-      "component" : true,
-      "plugin" : false,
-      "module" : true
+        "component" : true,
+        "plugin" : false,
+        "module" : false
     },
     "paths": {
-        "root":"../",
+        "root":"../../../",
         "installation": "/opt/web/limesurvey_live/",
-        "component": "../component/",
-        "module": "../module",
-        "plugin": "../plugin"
+        "component": "../../../Lime-Service-Component",
+        "module": "../../module",
+        "plugin": "../../plugin"
     },
     "verbosity": 1,
     "debug" : false

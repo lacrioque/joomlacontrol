@@ -30,7 +30,7 @@ const
         fs.readFile(componentInfoFile, function (err, data) {
             parser.parseString(data, function (err, result) {
                 let basename = path.basename(componentInfoFile, '.xml');
-                if (err) def.reject(err);
+                if (err) def.reject({ err: err, msg: 'Component info file not found' });
                 infoObj.basename = _.startsWith(basename, 'com_') ? basename : 'com_' + basename;
                 infoObj.name = result.extension.name;
                 infoObj.version = result.extension.version;
@@ -70,7 +70,9 @@ const
                         adminLanguage: values[4]
                     });
                 },
-                reject
+                function (errors) {
+                    reject({ err: errors, msg: 'Could not get all component files' })
+                }
             );
         });
     },

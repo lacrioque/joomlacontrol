@@ -120,6 +120,7 @@ const
     copyFile = function (type, filepath) {
         let extensionType = getExtensionType(filepath);
         let info = collectInfo();
+        log.debug(extensionType);
         return info.then(function (infoObj) {
             glob.infoObject = infoObj;
             let pathObject = {

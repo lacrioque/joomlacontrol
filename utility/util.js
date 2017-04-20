@@ -1,5 +1,9 @@
 "use strict";
 exports.normalizePath = function (thisPath) {
+    if (thisPath == undefined) {
+        throw new Error('ENOPATH: No path defined');
+    }
+
     const path = require("path"),
         root = process.cwd();
     thisPath = path.normalize(thisPath);
@@ -10,14 +14,19 @@ exports.normalizePath = function (thisPath) {
     }
 };
 exports.getExtensionType = function (filepath) {
-    const _ = require("lodash");
-    let splits = filepath.split('/');
+    const
+        _ = require("lodash"),
+        CONFIG = require('../config.json');
+    let splits = filepath.split('/'),
+        componentPath = CONFIG.paths.component.split('/').pop(),
+        modulePath = CONFIG.paths.module.split('/').pop(),
+        pluginPath = CONFIG.paths.plugin.split('/').pop();
 
-    if (_.some(splits, (item) => { return item == 'component' })) {
+    if (_.some(splits, (item) => { return (item == componentPath || item == 'component') })) {
         return 'component';
-    } else if (_.some(splits, (item) => { return item == 'module' })) {
+    } else if (_.some(splits, (item) => { return (item == modulePath || item == 'module') })) {
         return 'module';
-    } else if (_.some(splits, (item) => { return item == 'plugin' })) {
+    } else if (_.some(splits, (item) => { return (item == pluginPath || item == 'plugin') })) {
         return 'plugin';
     } else {
         return false;

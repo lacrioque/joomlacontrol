@@ -222,62 +222,62 @@ const copyFilesConstructor = function (pathObject) {
                 to = from.replace(siteLanguagePath, correctPath);
             return _copyFile(filename, from, to, 1, 1);
         },
-        copyFile = function (type, file, path) {
-            path = path || null;
-            log.debug([type, file, path]);
+        copyFile = function (type, file, thispath) {
+            thispath = thispath || null;
+            log.debug([type, file, thispath]);
             switch (type) {
             case "admin":
-                return copyTargetAdminFile(file, path);
+                return copyTargetAdminFile(file, thispath);
                 break;
             case "site":
-                return copyTargetSiteFile(file, path);
+                return copyTargetSiteFile(file, thispath);
                 break;
             case "module":
-                return copyTargetModuleFile(file, path);
+                return copyTargetModuleFile(file, thispath);
                 break;
             case "componentMedia":
-                return copyTargetComponentMediaFile(file, path);
+                return copyTargetComponentMediaFile(file, thispath);
                 break;
             case "moduleMedia":
-                return copyTargetModuleMediaFile(file, path);
+                return copyTargetModuleMediaFile(file, thispath);
                 break;
             case "plugin":
-                return copyTargetPluginFile(file, path);
+                return copyTargetPluginFile(file, thispath);
                 break;
             case "siteLanguage":
-                return copyTargetSiteLanguageFile(file, path);
+                return copyTargetSiteLanguageFile(file, thispath);
                 break;
             case "adminLanguage":
-                return copyTargetAdminLanguageFile(file, path);
+                return copyTargetAdminLanguageFile(file, thispath);
                 break;
             }
         },
-        copyFileArray = function (type, fileArray, path) {
-            path = path || null;
+        copyFileArray = function (type, fileArray, thispath) {
+            thispath = thispath || null;
             switch (type) {
             case "admin":
-                return copyAdminPart(fileArray, path);
+                return copyAdminPart(fileArray, thispath);
                 break;
             case "site":
-                return copySitePart(fileArray, path);
+                return copySitePart(fileArray, thispath);
                 break;
             case "module":
-                return copyModulePart(fileArray, path);
+                return copyModulePart(fileArray, thispath);
                 break;
             case "componentMedia":
-                return copyComponentMediaPart(fileArray, path);
+                return copyComponentMediaPart(fileArray, thispath);
                 break;
             case "moduleMedia":
-                return copyModuleMediaPart(fileArray, path);
+                return copyModuleMediaPart(fileArray, thispath);
                 break;
             case "plugin":
-                return copyPluginPart(fileArray, path);
+                return copyPluginPart(fileArray, thispath);
                 break;
             case "siteLanguage":
-                return copySiteLanguagePart(fileArray, path);
+                return copySiteLanguagePart(fileArray, thispath);
                 break;
             case "adminLanguage":
-                return copyAdminLanguagePart(fileArray, path);
+                return copyAdminLanguagePart(fileArray, thispath);
                 break;
             }
         };
