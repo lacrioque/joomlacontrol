@@ -1,15 +1,15 @@
 {
     "parts" : {
         "component" : true,
-        "plugin" : false,
-        "module" : false
+        "plugin" : true,
+        "module" : true
     },
     "paths": {
         "root":"../../../",
         "installation": "/opt/web/limesurvey_live/",
         "component": "../../../Lime-Service-Component",
-        "module": "../../module",
-        "plugin": "../../plugin"
+        "module": "../../../Lime-User-Softdelete-Module",
+        "plugin": "../../../Lime-Service-Plugin"
     },
     "verbosity": 1,
     "debug" : false

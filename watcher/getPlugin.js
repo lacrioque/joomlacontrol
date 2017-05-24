@@ -35,8 +35,10 @@ const
                 infoObj.name = result.extension.name;
                 infoObj.version = result.extension.version;
                 infoObj.language = {};
-                infoObj.language.site = _.map(result.extension.languages['0'].language, function (item, i) { return item._ });
-                infoObj.language.admin = false;
+                try {
+                    infoObj.language.site = _.map(result.extension.languages['0'].language, function (item, i) { return item._ });
+                    infoObj.language.admin = false;
+                } catch (e) { log.debug('No language files'); }
                 log.debug(infoObj);
                 def.resolve(infoObj);
             });

@@ -3,18 +3,22 @@
  */
 "use strict";
 const
+    CONFIG = require('../config.json'),
     path = require('path'),
     _ = require('lodash'),
     log = require('./logSys.js'),
+    singulateLastPath = function (pathpart) {
+        return pathpart.split('/').pop();
+    },
     locations = {
         admin: new RegExp(/\/admin\/(?!language\/)/),
         site: new RegExp(/\/site\/(?!language\/)/),
         adminLanguage: new RegExp(/\/admin\/language\//),
         siteLanguage: new RegExp(/\/language\//),
         componentMedia: new RegExp(/\/media\//),
-        plugin: new RegExp(/\/plugin\//),
-        module: new RegExp(/\/module\//),
-        moduleMedia: new RegExp(/\/module\/media\//)
+        plugin: new RegExp("/" + singulateLastPath(CONFIG.paths.plugin) + "/"),
+        module: new RegExp("/" + singulateLastPath(CONFIG.paths.module) + "/"),
+        moduleMedia: new RegExp("/" + singulateLastPath(CONFIG.paths.module) + "/media/")
     },
     checkMethods = {
         admin: function (filepath) {
