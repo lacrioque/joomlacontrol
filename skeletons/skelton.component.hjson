@@ -5,11 +5,11 @@
   "base" : {
     "admin" : {
       "controller" : {
-        "files": ["{{example}}.php", "{{example}}s.php", "index.html"]
+        "files": ["index.html"]
         },
       "language" : {
         "en-GB" : {
-          "files": ["en-GB.com_{{example}}.ini","en-GB.com_{{example}}.sys.ini", "index.html"]
+          "files": ["index.html"]
           },
           "files": ["index.html"]
         },
@@ -23,12 +23,12 @@
       **/
       "models" : {
         "forms": {
-          "files": ["{{example}}.xml", "index.html"]
+          "files": ["index.html"]
         },
         "fields" : {
           "files": ["index.html"]
         },
-        "files": ["{{example}}.php", "{{example}}s.php", "index.html"]
+        "files": ["index.html"]
       },
       "sql" : {
         "updates" : {
@@ -39,55 +39,33 @@
         "files": ["install.mysql.sql", "uninstall.mysql.sql", "index.html"]
       },
       "tables" : {
-        "files": ["{{example}}.php", "index.html"]
+        "files": ["index.html"]
       },
       "views" : {
-        "{{example}}" : {
-          "tmpl" : {
-            "files": ["edit.php", "index.html"]
-          },
-          "files": ["view.html.php", "index.html"]
+          "files": ["index.html"]
         }
-        "{{example}}s" : {
-          "tmpl" : {
-            "files": ["default.php", "index.html"]
-          },
-          "files": ["view.html.php", "index.html"]
-        }
-      }
     },
     "site" : {
       "controller" : {
-        "files": ["{{example}}.php", "{{example}}s.php", "index.html"]
+        "files": ["index.html"]
         },
       "language" : {
         "en-GB" : {
-          "files": ["en-GB.com_{{example}}.ini","en-GB.com_{{example}}.sys.ini", "index.html"]
+          "files": ["index.html"]
           },
           "files": ["index.html"]
         }
       "models" : {
         "forms": {
-          "files": ["{{example}}.xml", "index.html"]
+          "files": ["index.html"]
         },
         "fields" : {
           "files": ["index.html"]
         },
-        "files": ["{{example}}.php", "{{example}}s.php", "index.html"]
+        "files": ["index.html"]
       },
       "views" : {
-        "{{example}}" : {
-          "tmpl" : {
-            "files": ["edit.php", "index.html"]
-          },
-          "files": ["view.html.php", "index.html"]
-        }
-        "{{example}}s" : {
-          "tmpl" : {
-            "files": ["default.php", "index.html"]
-          },
-          "files": ["view.html.php", "index.html"]
-        }
+          "files": ["index.html"]
       }
     }
   }

@@ -1,0 +1,94 @@
+{
+  # Basic Skeleton for an example joomla-module
+  # From base on, it will create files as noted in here
+  # Right now the files will be empty, in coming versions some boilerplate code will be applied
+  "base" : {
+    "admin" : {
+      "controller" : {
+        "files": ["{{example}}.php", "{{example}}s.php", "index.html"]
+        },
+      "language" : {
+        "en-GB" : {
+          "files": ["en-GB.com_{{example}}.ini","en-GB.com_{{example}}.sys.ini", "index.html"]
+          },
+          "files": ["index.html"]
+        },
+      # I strongy discourage the use of helpers!
+      # There is actually no need of them, they make code messy and procedural
+      # Rather use fat models than helpers
+      /**
+      "helpers" : {
+        "files": ["{{example}}_helper.php", "index.html"]
+        },
+      **/
+      "models" : {
+        "forms": {
+          "files": ["{{example}}.xml", "index.html"]
+        },
+        "fields" : {
+          "files": ["index.html"]
+        },
+        "files": ["{{example}}.php", "{{example}}s.php", "index.html"]
+      },
+      "sql" : {
+        "updates" : {
+          "mysql" : {
+            "files": ["index.html"]
+          }
+        },
+        "files": ["install.mysql.sql", "uninstall.mysql.sql", "index.html"]
+      },
+      "tables" : {
+        "files": ["{{example}}.php", "index.html"]
+      },
+      "views" : {
+        "{{example}}" : {
+          "tmpl" : {
+            "files": ["edit.php", "index.html"]
+          },
+          "files": ["view.html.php", "index.html"]
+        }
+        "{{example}}s" : {
+          "tmpl" : {
+            "files": ["default.php", "index.html"]
+          },
+          "files": ["view.html.php", "index.html"]
+        }
+      }
+    },
+    "site" : {
+      "controller" : {
+        "files": ["{{example}}.php", "{{example}}s.php", "index.html"]
+        },
+      "language" : {
+        "en-GB" : {
+          "files": ["en-GB.com_{{example}}.ini","en-GB.com_{{example}}.sys.ini", "index.html"]
+          },
+          "files": ["index.html"]
+        }
+      "models" : {
+        "forms": {
+          "files": ["{{example}}.xml", "index.html"]
+        },
+        "fields" : {
+          "files": ["index.html"]
+        },
+        "files": ["{{example}}.php", "{{example}}s.php", "index.html"]
+      },
+      "views" : {
+        "{{example}}" : {
+          "tmpl" : {
+            "files": ["edit.php", "index.html"]
+          },
+          "files": ["view.html.php", "index.html"]
+        }
+        "{{example}}s" : {
+          "tmpl" : {
+            "files": ["default.php", "index.html"]
+          },
+          "files": ["view.html.php", "index.html"]
+        }
+      }
+    }
+  }
+}
