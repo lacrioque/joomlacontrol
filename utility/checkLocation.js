@@ -3,7 +3,9 @@
  */
 "use strict";
 const
-    CONFIG = require('../config.json'),
+    GETCONFIG = require('../config.js'),
+
+    CONFIG = GETCONFIG(),
     path = require('path'),
     _ = require('lodash'),
     log = require('./logSys.js'),

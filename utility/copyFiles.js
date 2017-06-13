@@ -10,7 +10,8 @@
 "use strict";
 const copyFilesConstructor = function (pathObject) {
     const
-        CONFIG = require('../config.json'),
+        GETCONFIG = require('../config.js'),
+        CONFIG = GETCONFIG(),
         q = require('q'),
         _ = require('lodash'),
         fs = require('fs-extra'),

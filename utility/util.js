@@ -16,7 +16,8 @@ exports.normalizePath = function (thisPath) {
 exports.getExtensionType = function (filepath) {
     const
         _ = require("lodash"),
-        CONFIG = require('../config.json');
+        GETCONFIG = require('../config.js'),
+        CONFIG = GETCONFIG();
     let splits = filepath.split('/'),
         componentPath = CONFIG.paths.component.split('/').pop(),
         modulePath = CONFIG.paths.module.split('/').pop(),

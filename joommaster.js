@@ -7,14 +7,16 @@ const
     fs = require('fs'),
     _ = require("lodash"),
     path = require("path"),
-    log = require('./utility/logSys.js'),
     Watch = require('./watcher/watchChange.js'),
+    JMGenerator = require('./generators/generator.js'),
     copyUtil = require('./utility/copyUtil.js'),
     scriptUtil = require('./utility/scriptUtil.js'),
     root = process.cwd(),
     args = require("yargs")
     .alias('z', 'zip')
     .describe('z', "Zip up all parts and exit immediately")
+    .alias('g', 'generator')
+    .describe('g', 'Start generating basic file and folder structure wizard')
     .alias('a', 'fullCopy')
     .describe('a', "Copy all defined extensions to the installation folder")
     .alias('c', 'copyComponent')
@@ -34,7 +36,7 @@ const
     .alias('h', 'help')
     .epilog('Copyright under the GPL3.0 by LimeSurvey GmbH 2017')
     .argv,
-    glob = {},
+    globals = {},
     checkConfigFile = function () {
         if (!fs.existsSync('./config.json')) {
             log.warn('No config file found!\nPlease create a config file first.');
@@ -58,7 +60,17 @@ const
             copyUtil.fullCopy();
         }
     },
-    startCreation = function () {
+    startGenerationWizard = function () {
+        process.env.verbosity = args.verbose;
+        const log = require('./utility/logSys.js');
+        let def = q.defer();
+        if (args.generator) {
+            let generator = new JMGenerator();
+            generator.run().then(def.resolve);
+        }
+        return def.promise
+    },
+    archiveExtensions = function () {
         if (args.zip) {
             args.nowatch = true;
             scriptUtil.zipAll().then(
@@ -66,10 +78,12 @@ const
             );
 
         }
-    },
-    createConfig = function () {};
+    };
 
-checkConfigFile();
-startCreation();
-createConfig();
-startWatching();
+startGenerationWizard().then(function (result) {
+    console.log(result);
+    checkConfigFile();
+    archiveExtensions();
+    createConfig();
+    startWatching();
+});

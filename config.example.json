@@ -1,0 +1,16 @@
+{
+    "parts" : {
+        "component" : false,
+        "plugin" : false,
+        "module" : false
+    },
+    "paths": {
+        "root":"../",
+        "installation": "/path/to/installation/",
+        "component": "../component",
+        "module": "../module",
+        "plugin": "../plugin",
+        "packagesDir": "../packages"
+    },
+    "verbosity": 1
+}

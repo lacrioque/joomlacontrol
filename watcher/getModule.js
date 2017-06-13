@@ -4,7 +4,8 @@
  */
 "use strict";
 const
-    CONFIG = require('../config.json'),
+    GETCONFIG = require('../config.js'),
+    CONFIG = GETCONFIG(),
     fs = require('fs-extra'),
     q = require('q'),
     _ = require('lodash'),

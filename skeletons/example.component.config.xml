@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.2.0" method="upgrade">
+
+    <name>{{component.name}}</name>
+    <!-- The following elements are optional and free of formatting constraints -->
+    <creationDate>{{currentDate.monthName}} {{currentDate.day}}</creationDate>
+    {{#component.author.name}}
+    <author>{{component.author.name}}</author>
+    {{/component.author.name}}
+    {{#component.author.email}}
+    <authorEmail>{{component.author.email}}</authorEmail>
+    {{/component.author.email}}
+    {{#component.author.url}}
+    <authorUrl>{{component.author.url}}</authorUrl>
+    {{/component.author.url}}
+    <!--  The version string is recorded in the components table -->
+    <version>{{component.version}}</version>
+    <!-- The description is optional and defaults to the name -->
+    <description>{{component.description}}</description>
+
+    <!-- Runs on install -->
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+
+    <!-- Runs on uninstall -->
+    <uninstall>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>
+
+    <!-- Runs on update; New since J2.5 -->
+    <update>
+        <schemas>
+            <schemapath type="mysql">sql/updates/mysql</schemapath>
+        </schemas>
+    </update>
+
+    <!-- Site Main File Copy Section -->
+    <!-- Note the folder attribute: This attribute describes the folder
+        to copy FROM in the package to install therefore files copied
+        in this section are copied from /site/ in the package -->
+    <files folder="site">
+      {{#component.site.files}}
+      <filename>{{name}}</filename>
+      {{/component.site.files}}
+
+      {{#component.site.folders}}
+      <folder>{{name}}</folder>
+      {{/component.site.folders}}
+    </files>
+
+    <languages folder="site/language">
+      {{#component.site.languages}}
+      <language tag="{{tag}}">{{tag}}/{{tag}}.com_{{component.basename}}.ini</language>
+      {{/component.site.languages}}
+    </languages>
+
+    <media destination="com_{{component.basename}}" folder="media">
+      {{#component.media.files}}
+      <filename>{{name}}</filename>
+      {{/component.media.files}}
+
+      {{#component.media.folders}}
+      <folder>{{name}}</folder>
+      {{/component.media.folders}}
+    </media>
+
+    <administration>
+        <!-- Administration Menu Section -->
+        <menu link='index.php?option=com_{{component.basename}}' img="../media/com_{{component.basename}}/images/{{component.logo}}">{{component.mainmenu}}</menu>
+        {{#component.submenu}}
+        <submenu>
+          {{#component.submenu.items}}
+          <menu
+              view="{{view}}"
+              layout="{{layout}}"
+              img="{{image}}"
+              alt="{{alternative_title}}"
+              >
+              {{translateable}}
+          </menu>
+          {{/component.submenu}}
+        </submenu>
+        {{/component.submenu}}
+
+        <!-- Administration Main File Copy Section -->
+        <!-- Note the folder attribute: This attribute describes the folder
+            to copy FROM in the package to install therefore files copied
+            in this section are copied from /admin/ in the package -->
+        <files folder="admin">
+          {{#component.admin.files}}
+          <filename>{{name}}</filename>
+          {{/component.admin.files}}
+
+          {{#component.admin.folders}}
+          <folder>{{name}}</folder>
+          {{/component.admin.folders}}
+
+        </files>
+        <languages folder="admin/language">
+          {{#component.admin.languages}}
+          <language tag="{{tag}}">{{tag}}/{{tag}}.com_{{component.basename}}.ini</language>
+          <language tag="{{tag}}">{{tag}}/{{tag}}.com_{{component.basename}}.sys.ini</language>
+          {{/component.admin.languages}}
+        </languages>
+    </administration>
+
+</extension>

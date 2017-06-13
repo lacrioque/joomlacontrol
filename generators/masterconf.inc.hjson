@@ -1,0 +1,175 @@
+//Master config hjson to confgure a complete joomla extension
+{
+  "watch" : false,
+    "baseconfig": {
+        "parts": {
+            "component": false,
+            "plugin": false,
+            "module": false
+        },
+        "paths": {
+            "installation": "",
+            "component": "../component/",
+            "module": "../module",
+            "plugin": "../plugin",
+        },
+        "verbosity": 1
+    },
+    "config" : {
+      "type" : "",
+      "template" : false,
+      "onlyFolders": false,
+      "templateConf" : {}
+      },
+    "component": {
+        //the name can be anything you like
+        "name": "",
+        //the basename can only be composed of lowercase letters
+        "basename": "",
+        //the logo should reside in the media/images folder
+        "logo": "",
+        //How the menuitem is called
+        "mainmenu": "",
+        //the basic description
+        "description": "",
+        "author": {
+            "name": "",
+            "email": "",
+            "url": ""
+        },
+        "submenu": {
+            "items": [{
+                "view": "",
+                "layout": "",
+                "image": "",
+                "alternative_title": ""
+            }]
+        },
+        "media": {
+          "files": [{
+              "name": ""
+          }],
+          "folders": [{
+              "name": ""
+          }]
+        },
+        "site": {
+            "files": [{
+                "name": ""
+            }],
+            "folders": [{
+                "name": ""
+            }],
+            "languages": [{
+                "tag": "en-GB"
+            }],
+        },
+        "admin": {
+            "files": [{
+                "name": ""
+            }],
+            "folders": [{
+                "name": ""
+            }],
+            "languages": [{
+                "tag": "en-GB"
+            }],
+        }
+    },
+    "module": {
+        //the name can be anything you like
+        "name": "",
+        //the basename can only be composed of lowercase letters
+        "basename": "",
+        //the logo should reside in the media/images folder
+        "logo": "",
+        //How the menuitem is called
+        "mainmenu": "",
+        //the basic description
+        "description": "",
+        "author": {
+            "name": "",
+            "email": "",
+            "url": ""
+        },
+        "params": {
+            "fieldsets": [{
+              "name" : "",
+              "fields" : [{
+                "name": "",
+                "type": "",
+                "default": "",
+                "label": "",
+                "options" : [{
+                  "value" : "",
+                  "label": ""
+                  }]
+            }]
+          }]
+        },
+        "main": {
+            "files": [{
+                "name": ""
+            }],
+            "folders": [{
+                "name": ""
+            }],
+        },
+        "media": {
+          "files": [{
+              "name": ""
+          }],
+          "folders": [{
+              "name": ""
+          }]
+        },
+        "languages": [{
+          "tag": "en-GB"
+          }],
+    },
+    "plugin": {
+        //the name can be anything you like
+        "name": "",
+        //the basename can only be composed of lowercase letters
+        "basename": "",
+        //the logo should reside in the media/images folder
+        "logo": "",
+        //How the menuitem is called
+        "mainmenu": "",
+        //the basic description
+        "description": "",
+        "author": {
+            "name": "",
+            "email": "",
+            "url": ""
+        },
+        "submenu": {
+            "items": [{
+                "view": "",
+                "layout": "",
+                "image": "",
+                "alternative_title": ""
+            }]
+        },
+        "main": {
+            "files": [{
+                "name": ""
+            }],
+            "folders": [{
+                "name": ""
+            }],
+        },
+        "media": {
+          "files": [{
+              "name": ""
+          }],
+          "folders": [{
+              "name": ""
+          }]
+        },
+        "languages": [{
+            "tag": "en-GB"
+        }],
+    }
+
+}

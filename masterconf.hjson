@@ -1,0 +1,320 @@
+{
+  watch: false
+  baseconfig:
+  {
+    parts:
+    {
+      component: true
+      plugin: false
+      module: false
+    }
+    paths:
+    {
+      installation: /path/to/installation/
+      component: ../component
+      module: ../module
+      plugin: ../plugin
+      root: ../
+      packagesDir: ../packages
+    }
+    verbosity: 2
+  }
+  config:
+  {
+    type: component
+    template: true
+    onlyFolders: false
+    templateConf:
+    {
+      base:
+      {
+        admin:
+        {
+          controller:
+          {
+            files:
+            [
+              limerateme.php
+              limeratemes.php
+              index.html
+            ]
+          }
+          language:
+          {
+            en-GB:
+            {
+              files:
+              [
+                en-GB.com_limerateme.ini
+                en-GB.com_limerateme.sys.ini
+                index.html
+              ]
+            }
+            files:
+            [
+              index.html
+            ]
+          }
+          models:
+          {
+            forms:
+            {
+              files:
+              [
+                limerateme.xml
+                index.html
+              ]
+            }
+            fields:
+            {
+              files:
+              [
+                index.html
+              ]
+            }
+            files:
+            [
+              limerateme.php
+              limeratemes.php
+              index.html
+            ]
+          }
+          sql:
+          {
+            updates:
+            {
+              mysql:
+              {
+                files:
+                [
+                  index.html
+                ]
+              }
+            }
+            files:
+            [
+              install.mysql.sql
+              uninstall.mysql.sql
+              index.html
+            ]
+          }
+          tables:
+          {
+            files:
+            [
+              limerateme.php
+              index.html
+            ]
+          }
+          views:
+          {
+            limerateme:
+            {
+              tmpl:
+              {
+                files:
+                [
+                  edit.php
+                  index.html
+                ]
+              }
+              files:
+              [
+                view.html.php
+                index.html
+              ]
+            }
+            limeratemes:
+            {
+              tmpl:
+              {
+                files:
+                [
+                  default.php
+                  index.html
+                ]
+              }
+              files:
+              [
+                view.html.php
+                index.html
+              ]
+            }
+          }
+        }
+        site:
+        {
+          controller:
+          {
+            files:
+            [
+              limerateme.php
+              limeratemes.php
+              index.html
+            ]
+          }
+          language:
+          {
+            en-GB:
+            {
+              files:
+              [
+                en-GB.com_limerateme.ini
+                en-GB.com_limerateme.sys.ini
+                index.html
+              ]
+            }
+            files:
+            [
+              index.html
+            ]
+          }
+          models:
+          {
+            forms:
+            {
+              files:
+              [
+                limerateme.xml
+                index.html
+              ]
+            }
+            fields:
+            {
+              files:
+              [
+                index.html
+              ]
+            }
+            files:
+            [
+              limerateme.php
+              limeratemes.php
+              index.html
+            ]
+          }
+          views:
+          {
+            limerateme:
+            {
+              tmpl:
+              {
+                files:
+                [
+                  edit.php
+                  index.html
+                ]
+              }
+              files:
+              [
+                view.html.php
+                index.html
+              ]
+            }
+            limeratemes:
+            {
+              tmpl:
+              {
+                files:
+                [
+                  default.php
+                  index.html
+                ]
+              }
+              files:
+              [
+                view.html.php
+                index.html
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+  component:
+  {
+    name: LimeSurvey Rate Me
+    basename: limerateme
+    logo: ""
+    mainmenu: ""
+    description: ""
+    author:
+    {
+      name: ""
+      email: ""
+      url: ""
+    }
+    submenu:
+    {
+      items:
+      [
+        {
+          view: ""
+          layout: ""
+          image: ""
+          alternative_title: ""
+        }
+      ]
+    }
+    media:
+    {
+      files:
+      [
+        {
+          name: ""
+        }
+      ]
+      folders:
+      [
+        {
+          name: ""
+        }
+      ]
+    }
+    site:
+    {
+      files:
+      [
+        {
+          name: ""
+        }
+      ]
+      folders:
+      [
+        {
+          name: ""
+        }
+      ]
+      languages:
+      [
+        {
+          tag: en-GB
+        }
+      ]
+    }
+    admin:
+    {
+      files:
+      [
+        {
+          name: ""
+        }
+      ]
+      folders:
+      [
+        {
+          name: ""
+        }
+      ]
+      languages:
+      [
+        {
+          tag: en-GB
+        }
+      ]
+    }
+  }
+  module: null
+  plugin: null
+}

@@ -3,7 +3,8 @@
  */
 "use strict";
 const
-    CONFIG = require('../config.json'),
+    GETCONFIG = require('../config.js'),
+    CONFIG = GETCONFIG(),
     q = require('q'),
     _ = require('lodash'),
     fs = require('fs-extra'),
@@ -12,6 +13,7 @@ const
     readDirectory = require('./readDirectory.js'),
     path = require('path'),
     normalizePath = require('../utility/util.js').normalizePath,
+    packagesDir = normalizePath(CONFIG.paths.packagesDir),
     _createInZipPath = function (filePath) {
         let basePath = normalizePath(CONFIG.paths.root);
         let inZip = filePath.replace(basePath, '');
@@ -29,7 +31,7 @@ const
                     //log.debug([_createInZipPath(file), file]);
                 });
                 let data = zip.generate({ base64: false, compression: 'DEFLATE' });
-                fs.writeFile(path.join(CONFIG.paths.root, 'packages', 'component.zip'), data, 'binary', (err) => {
+                fs.writeFile(path.join(packagesDir, 'component.zip'), data, 'binary', (err) => {
                     if (err) { deferred.reject(err); }
                     log.warn('Created component.zip');
                     deferred.resolve();
@@ -50,7 +52,7 @@ const
                     //log.debug([_createInZipPath(file), file]);
                 });
                 let data = zip.generate({ base64: false, compression: 'DEFLATE' });
-                fs.writeFile(path.join(CONFIG.paths.root, 'packages', 'module.zip'), data, 'binary', (err) => {
+                fs.writeFile(path.join(packagesDir, 'module.zip'), data, 'binary', (err) => {
                     if (err) { deferred.reject(err); }
                     log.warn('Created module.zip');
                     deferred.resolve();
@@ -71,7 +73,7 @@ const
                     //log.debug([_createInZipPath(file), file]);
                 });
                 let data = zip.generate({ base64: false, compression: 'DEFLATE' });
-                fs.writeFile(path.join(CONFIG.paths.root, 'packages', 'plugin.zip'), data, 'binary', (err) => {
+                fs.writeFile(path.join(packagesDir, 'plugin.zip'), data, 'binary', (err) => {
                     if (err) { deferred.reject(err); }
                     log.warn('Created plugin.zip');
                     deferred.resolve();
@@ -98,6 +100,6 @@ const
         zipAll: zipAll
     };
 
-let packagesDir = fs.mkdirsSync(path.join(CONFIG.paths.root, 'packages'));
+let checkPackagesDir = fs.mkdirsSync(normalizePath(CONFIG.paths.packagesDir));
 
 module.exports = scriptUtil;

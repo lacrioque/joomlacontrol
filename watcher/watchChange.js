@@ -4,7 +4,8 @@
 "use strict";
 const CreateWatchChange = function () {
     const
-        CONFIG = require('../config.json'),
+        GETCONFIG = require('../config.js'),
+        CONFIG = GETCONFIG(),
         glob = {
             noWatch: false,
             watcher: null,
@@ -13,6 +14,7 @@ const CreateWatchChange = function () {
         readline = require('readline'),
         _ = require('lodash'),
         normalizePath = require('../utility/util.js').normalizePath,
+        scriptUtil = require('../utility/scriptUtil.js'),
         log = require('../utility/logSys.js'),
         checkLocation = require('../utility/checkLocation.js'),
         copyUtil = require('../utility/copyUtil.js'),
@@ -31,9 +33,24 @@ const CreateWatchChange = function () {
                     (CONFIG.parts.component ? "\n#    cc - full copy of the component" : '') +
                     (CONFIG.parts.module ? "\n#    cm - full copy of the module" : '') +
                     (CONFIG.parts.plugin ? "\n#    cp - full copy of the plugin" : '') + `
-#    h - toggle direct synchronization (State: ` + (glob.noWatch ? 'OFF' : 'ON') + `)
-#    s - toggle Silence, no more logging messages (State: ` + process.env.verbosity + `)
+#    h - toggle direct synchronization (State: ${(glob.noWatch ? 'OFF' : 'ON')})
+#    s - toggle Silence, no more logging messages (State: ${process.env.verbosity})
+#    e - Show extended methods
 #    m - Show this message
+####`;
+            };
+            let menuExtendedString = function () {
+                return `###
+# Extended functions (be careful!)
+#
+# Following commands are possible:
+#    eza - Zip all extensions to ${CONFIG.parts.packagesDir}
+#    ezc - Zip up the component to ${CONFIG.parts.packagesDir}/componennt.zip
+#    ezm - Zip up the component to ${CONFIG.parts.packagesDir}/module.zip
+#    ezp - Zip up the component to ${CONFIG.parts.packagesDir}/plugin.zip
+#    ezg - Start generator for another extension
+#    e - Show this message
+#    m - Show main menu
 ####`;
             };
             console.log(menuString());
@@ -104,6 +121,34 @@ const CreateWatchChange = function () {
                 case 's':
                     process.emit('changeVerbosity');
                     console.log("Verbositiy level: " + (process.env.verbosity === 0 ? "WARN" : (process.env.verbosity === 1 ? "INFO" : "DEBUG")));
+                    rl.prompt();
+                    break;
+                case 'ezc':
+                    scriptUtil.zipComponent();
+                    console.log(menuExtendedString());
+                    rl.prompt();
+                    break;
+                case 'ezm':
+                    scriptUtil.zipModule();
+                    console.log(menuExtendedString());
+                    rl.prompt();
+                    break;
+                case 'ezp':
+                    scriptUtil.zipPlugin();
+                    console.log(menuExtendedString());
+                    rl.prompt();
+                    break;
+                case 'eza':
+                    scriptUtil.zipAll();
+                    console.log(menuExtendedString());
+                    rl.prompt();
+                    break;
+                case 'eg':
+                    console.log(menuExtendedString());
+                    rl.prompt();
+                    break;
+                case 'e':
+                    console.log(menuExtendedString());
                     rl.prompt();
                     break;
                 case 'm':

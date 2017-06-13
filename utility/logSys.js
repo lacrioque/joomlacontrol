@@ -1,9 +1,11 @@
 "use strict";
-
 const
-    CONFIG = require('../config.json'),
-    createLog = function () {
-        let verbosity = process.env.verbosity || CONFIG.verbosity || 0;
+    createLog = function (verbosity = 0) {
+        let CONFIG = { verbosity: null };
+        try {
+            CONFIG = require('../config.json');
+        } catch (e) {}
+        verbosity = process.env.verbosity || CONFIG.verbosity || 0;
         process.env.verbosity = verbosity;
         process.on('changeVerbosity', function () {
             verbosity++;
