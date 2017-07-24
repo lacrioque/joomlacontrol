@@ -10,7 +10,7 @@
     }
     paths:
     {
-      installation: /path/to/installation/
+      installation: /opt/web/limesurveylocal/
       component: ../component
       module: ../module
       plugin: ../plugin
@@ -34,8 +34,8 @@
           {
             files:
             [
-              limerateme.php
-              limeratemes.php
+              lstranslations.php
+              lstranslationss.php
               index.html
             ]
           }
@@ -45,8 +45,8 @@
             {
               files:
               [
-                en-GB.com_limerateme.ini
-                en-GB.com_limerateme.sys.ini
+                en-GB.com_lstranslations.ini
+                en-GB.com_lstranslations.sys.ini
                 index.html
               ]
             }
@@ -61,7 +61,7 @@
             {
               files:
               [
-                limerateme.xml
+                lstranslations.xml
                 index.html
               ]
             }
@@ -74,8 +74,8 @@
             }
             files:
             [
-              limerateme.php
-              limeratemes.php
+              lstranslations.php
+              lstranslationss.php
               index.html
             ]
           }
@@ -102,13 +102,13 @@
           {
             files:
             [
-              limerateme.php
+              lstranslations.php
               index.html
             ]
           }
           views:
           {
-            limerateme:
+            lstranslations:
             {
               tmpl:
               {
@@ -124,7 +124,7 @@
                 index.html
               ]
             }
-            limeratemes:
+            lstranslationss:
             {
               tmpl:
               {
@@ -148,8 +148,8 @@
           {
             files:
             [
-              limerateme.php
-              limeratemes.php
+              lstranslations.php
+              lstranslationss.php
               index.html
             ]
           }
@@ -159,8 +159,8 @@
             {
               files:
               [
-                en-GB.com_limerateme.ini
-                en-GB.com_limerateme.sys.ini
+                en-GB.com_lstranslations.ini
+                en-GB.com_lstranslations.sys.ini
                 index.html
               ]
             }
@@ -175,7 +175,7 @@
             {
               files:
               [
-                limerateme.xml
+                lstranslations.xml
                 index.html
               ]
             }
@@ -188,14 +188,14 @@
             }
             files:
             [
-              limerateme.php
-              limeratemes.php
+              lstranslations.php
+              lstranslationss.php
               index.html
             ]
           }
           views:
           {
-            limerateme:
+            lstranslations:
             {
               tmpl:
               {
@@ -211,7 +211,7 @@
                 index.html
               ]
             }
-            limeratemes:
+            lstranslationss:
             {
               tmpl:
               {
@@ -234,8 +234,8 @@
   }
   component:
   {
-    name: LimeSurvey Rate Me
-    basename: limerateme
+    name: LimeSurvey Translations
+    basename: lstranslations
     logo: ""
     mainmenu: ""
     description: ""

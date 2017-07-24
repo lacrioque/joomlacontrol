@@ -23,9 +23,16 @@ const CreateWatchChange = function () {
             output: process.stdout
         }),
         watchMenu = function () {
+            log.debug(CONFIG);
             let menuString = function () {
+                let watchingParts = [];
+                _.each(CONFIG.parts, (isWatching,part)=>{ 
+                    if(isWatching){ 
+                        watchingParts.push(CONFIG.paths[part]+'/**/**');   
+                    } 
+                });
                 return `###
-# Watching ` + CONFIG.componentPath + `/**/** for changes
+# Watching ${JSON.stringify(watchingParts)} for changes
 #
 # Following commands are possible:
 #    x - stop watching and close

@@ -2,15 +2,15 @@
   "parts": {
     "component": false,
     "plugin": false,
-    "module": false
+    "module": true
   },
   "paths": {
     "root": "../",
-    "installation": "/path/to/installation/",
+    "installation": "/var/www/limesurvey.org/web/",
     "component": "../component",
     "module": "../module",
     "plugin": "../plugin",
     "packagesDir": "../packages"
   },
-  "verbosity": 2
+  "verbosity": 1
 }

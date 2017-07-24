@@ -47,7 +47,7 @@ const
         if (args.nowatch) {
             return true;
         }
-        glob.watcher = new Watch();
+       globals.watcher = new Watch();
     },
     copyStuff = function () {
         if (args.copyComponent) {
@@ -67,6 +67,8 @@ const
         if (args.generator) {
             let generator = new JMGenerator();
             generator.run().then(def.resolve);
+        } else {
+            return false;
         }
         return def.promise
     },
@@ -80,10 +82,21 @@ const
         }
     };
 
-startGenerationWizard().then(function (result) {
-    console.log(result);
+    //startWatching();
+
+let generationPromise = startGenerationWizard();
+if(generationPromise === false){
     checkConfigFile();
     archiveExtensions();
-    createConfig();
     startWatching();
-});
+} else {
+    generationPromise.then(() => {
+        console.log(result);
+        checkConfigFile();
+        archiveExtensions();
+        createConfig();
+        startWatching();
+    })
+}
+
+
