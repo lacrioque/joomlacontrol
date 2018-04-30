@@ -20,7 +20,8 @@ const CreateWatchChange = function () {
         copyUtil = require('../utility/copyUtil.js'),
         rl = readline.createInterface({
             input: process.stdin,
-            output: process.stdout
+            output: process.stdout,
+            terminal: false
         }),
         watchMenu = function () {
             log.debug(CONFIG);
@@ -37,9 +38,9 @@ const CreateWatchChange = function () {
 # Following commands are possible:
 #    x - stop watching and close
 #    c - full copy of all parts` +
-                    (CONFIG.parts.component ? "\n#    cc - full copy of the component" : '') +
-                    (CONFIG.parts.module ? "\n#    cm - full copy of the module" : '') +
-                    (CONFIG.parts.plugin ? "\n#    cp - full copy of the plugin" : '') + `
+                    (CONFIG.paths.component ? "\n#    cc - full copy of the component" : '') +
+                    (CONFIG.paths.module ? "\n#    cm - full copy of the module" : '') +
+                    (CONFIG.paths.plugin ? "\n#    cp - full copy of the plugin" : '') + `
 #    h - toggle direct synchronization (State: ${(glob.noWatch ? 'OFF' : 'ON')})
 #    s - toggle Silence, no more logging messages (State: ${process.env.verbosity})
 #    e - Show extended methods
@@ -52,9 +53,9 @@ const CreateWatchChange = function () {
 #
 # Following commands are possible:
 #    eza - Zip all extensions to ${CONFIG.parts.packagesDir}
-#    ezc - Zip up the component to ${CONFIG.parts.packagesDir}/componennt.zip
-#    ezm - Zip up the component to ${CONFIG.parts.packagesDir}/module.zip
-#    ezp - Zip up the component to ${CONFIG.parts.packagesDir}/plugin.zip
+#    ezc - Zip up the component to ${CONFIG.paths.packagesDir}/componennt.zip
+#    ezm - Zip up the component to ${CONFIG.paths.packagesDir}/module.zip
+#    ezp - Zip up the component to ${CONFIG.paths.packagesDir}/plugin.zip
 #    ezg - Start generator for another extension
 #    e - Show this message
 #    m - Show main menu
@@ -176,6 +177,15 @@ const CreateWatchChange = function () {
                 console.log("#########################################################################");
                 process.exit(0);
             });
+            rl.on('SIGTERM', () => {
+                glob.watcher.close();
+                rl.close()
+                process.stdout.write("\n\n\r");
+                console.log("#########################################################################");
+                console.log("#######         Thank you for using LimeSurvey JoomMaster         #######");
+                console.log("#########################################################################");
+                process.exit(0);
+            });
         },
         watchFiles = function () {
             let foldersToWatch = [];
@@ -204,5 +214,6 @@ const CreateWatchChange = function () {
 
     watchFiles();
     watchMenu();
+    return this;
 }
 module.exports = CreateWatchChange;

@@ -134,7 +134,9 @@ const copyFilesConstructor = function (pathObject) {
         copyModulePart = function (moduleFiles, modulePath) {
             modulePath = modulePath || normalizePath(CONFIG.paths.module);
             let correctPath = _createCorrectModulePath(),
-                fromPath = modulePath;
+            fromPath = modulePath;
+            
+            log.debug([correctPath,fromPath,modulePath, moduleFiles]);
             return _copyArrayofFiles(moduleFiles, fromPath, correctPath);
         },
         copyPluginPart = function (pluginFiles, pluginPath) {
@@ -255,7 +257,7 @@ const copyFilesConstructor = function (pathObject) {
         },
         copyFileArray = function (type, fileArray, thispath) {
             thispath = thispath || null;
-            switch (type) {
+        switch (type) {
             case "admin":
                 return copyAdminPart(fileArray, thispath);
                 break;
@@ -280,6 +282,8 @@ const copyFilesConstructor = function (pathObject) {
             case "adminLanguage":
                 return copyAdminLanguagePart(fileArray, thispath);
                 break;
+            default:
+                log.debug([type, fileArray, thispath]);
             }
         };
     return {

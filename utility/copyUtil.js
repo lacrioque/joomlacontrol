@@ -22,15 +22,15 @@ const
         case 'component':
             let componentInfo = getComponent.getComponentInfo(),
                 componentFiles = getComponent.getComponentFiles();
-            return q.all([componentInfo, componentFiles]);
+            return q.allSettled([componentInfo, componentFiles]);
         case 'module':
             let moduleInfo = getModule.getModuleInfo(),
                 moduleFiles = getModule.getModuleFiles();
-            return q.all([moduleInfo, moduleFiles]);
+            return q.allSettled([moduleInfo, moduleFiles]);
         case 'plugin':
             let pluginInfo = getPlugin.getPluginInfo(),
                 pluginFiles = getPlugin.getPluginFiles();
-            return q.all([pluginInfo, pluginFiles]);
+            return q.allSettled([pluginInfo, pluginFiles]);
         }
     },
     collectInfo = function () {
@@ -51,15 +51,15 @@ const
         return collectComplete('component').then(
             function (componentData) {
                 let
-                    componentInfoObject = componentData[0],
-                    componentFilesObject = componentData[1],
+                    componentInfoObject = componentData[0].value,
+                    componentFilesObject = componentData[1].value,
                     pathObject = {
                         componentName: componentInfoObject.basename,
                         siteLanguagePath: path.join(normalizePath(CONFIG.paths.component), 'site', 'language'),
                         adminLanguagePath: path.join(normalizePath(CONFIG.paths.component), 'admin', 'language')
                     },
                     copyFilesObject = new CopyFiles(pathObject);
-                log.debugObj(copyFilesObject);
+
                 let promiseArray = _.map(componentFilesObject, function (files, type) {
                     return copyFilesObject.copyFileArray(type, files);
                 });
@@ -73,14 +73,14 @@ const
         return collectComplete('module').then(
             function (moduleData) {
                 let
-                    moduleInfoObject = moduleData[0],
-                    moduleFilesObject = moduleData[1],
+                    moduleInfoObject = moduleData[0].value,
+                    moduleFilesObject = moduleData[1].value,
                     pathObject = {
                         moduleName: moduleInfoObject.basename,
                         siteLanguagePath: path.join(normalizePath(CONFIG.paths.module), 'language')
                     },
                     copyFilesObject = new CopyFiles(pathObject);
-                log.debugObj(copyFilesObject);
+                
                 let promiseArray = _.map(moduleFilesObject, function (files, type) {
                     return copyFilesObject.copyFileArray(type, files);
                 });
@@ -94,14 +94,14 @@ const
         return collectComplete('plugin').then(
             function (pluginData) {
                 let
-                    pluginInfoObject = pluginData[0],
-                    pluginFilesObject = pluginData[1],
+                    pluginInfoObject = pluginData[0].value,
+                    pluginFilesObject = pluginData[1].value,
                     pathObject = {
                         pluginName: pluginInfoObject.basename,
                         siteLanguagePath: path.join(normalizePath(CONFIG.paths.plugin), 'language')
                     },
                     copyFilesObject = new CopyFiles(pathObject);
-                log.debugObj(copyFilesObject);
+                
                 let promiseArray = _.map(moduleFilesObject, function (files, type) {
                     return copyFilesObject.copyFileArray(type, files);
                 });

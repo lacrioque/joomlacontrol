@@ -6,11 +6,11 @@ exports.normalizePath = function (thisPath) {
 
     const path = require("path"),
         root = process.cwd();
-    thisPath = path.normalize(thisPath);
-    if (path.isAbsolute(thisPath)) {
-        return thisPath
-    } else {
-        return path.join(root, thisPath);
+        if (path.isAbsolute(thisPath)) {
+            return thisPath
+        } else {
+        thisPath = path.join(root, thisPath);
+        return path.normalize(thisPath);
     }
 };
 exports.getExtensionType = function (filepath) {

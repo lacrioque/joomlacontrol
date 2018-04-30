@@ -60,8 +60,11 @@ const
         }
     },
     checkLocation = function (filepath) {
-        return _.findKey(checkMethods, function (fn) {
-            return fn(filepath);
+        log.debug(locations);
+        return _.findKey(checkMethods, function (fn, name) {
+            var found = fn(filepath);
+           log.debug(found, name);
+            return found;
         });
 
     };

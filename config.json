@@ -1,6 +1,6 @@
 {
   "parts": {
-    "component": false,
+    "component": true,
     "plugin": false,
     "module": true
   },
